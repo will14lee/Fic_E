@@ -34,7 +34,7 @@ function LoginForm() {
 
 
     return (
-        <div>
+        <div className='App'>
             <h2>Login</h2>
             {errors ? (<h4>Invalid Credentials</h4>):(<br/>)}
             <p>

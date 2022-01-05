@@ -18,7 +18,7 @@ const Navbar = () => {
     }
 
     return (
-        <div>
+        <div className='App'>
             <p><Link to= "/">Home</Link></p>
             <p><Link to= "/login" onClick={handleDelete()}>Logout</Link></p>
             <p><Link to="/signup">Signup</Link></p>
