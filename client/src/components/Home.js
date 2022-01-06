@@ -92,7 +92,6 @@ const Home = () => {
             {sampleStory ? 
             (<div>
                 {storyForm(sampleStory)}
-                <Link to={}></Link>
             </div>):
             (<div>
                 <h3>It appears you don't have any stories added to your reading list! 
