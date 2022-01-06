@@ -18,10 +18,17 @@ const Navbar = () => {
     }
 
     return (
-        <div className='App'>
-            <p><Link to= "/">Home</Link></p>
-            <p><Link to= "/login" onClick={handleDelete()}>Logout</Link></p>
-            <p><Link to="/signup">Signup</Link></p>
+        <div className="App">
+            <table>
+                <tr>
+                    <td><Link to= "/">Home</Link></td>
+                    <td><Link to="/signup">Signup</Link></td>
+                    <td><Link to= "/new">Create a Story</Link></td>
+                    <td><Link to= "/stories">View Stories</Link></td>
+                    <td><Link to= "/login" onClick={handleDelete()}>Logout</Link></td>
+                </tr>
+            </table>
+
         </div>
     )
 }

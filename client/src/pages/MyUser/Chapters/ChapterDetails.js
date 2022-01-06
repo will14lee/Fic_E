@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StoriesForm = () => {
+const ChapterDetails = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const StoriesForm = () => {
     )
 }
 
-export default StoriesForm
+export default ChapterDetails

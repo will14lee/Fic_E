@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PagesForm = () => {
+const OriginalPageForm = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const PagesForm = () => {
     )
 }
 
-export default PagesForm
+export default OriginalPageForm

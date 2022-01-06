@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OriginalChapters = () => {
+const OriginalPageDetail = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const OriginalChapters = () => {
     )
 }
 
-export default OriginalChapters
+export default OriginalPageDetail

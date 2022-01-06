@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Chapters = () => {
+const PageForm = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const Chapters = () => {
     )
 }
 
-export default Chapters
+export default PageForm

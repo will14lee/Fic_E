@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OriginalChaptersForm = () => {
+const OriginalPagesIndex = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const OriginalChaptersForm = () => {
     )
 }
 
-export default OriginalChaptersForm
+export default OriginalPagesIndex
