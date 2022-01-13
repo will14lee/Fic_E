@@ -21,7 +21,7 @@ function LoginForm() {
             if(r.ok){
                 setUsername('')
                 setPassword('')
-                history('/')
+                history.push('/')
                 console.log("Submitted!")
                 setErrors(false)
 
@@ -48,7 +48,7 @@ function LoginForm() {
             <p>
                 <button type="submit" onClick={handleSubmit}>Login</button>
             </p>
-            <p>Don't Have an account? <Link to="/signup">Sign up here!</Link></p>
+            <p>Don't Have an account? <Link to="/signup/">Sign up here!</Link></p>
         </div>
     )
 }

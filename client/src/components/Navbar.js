@@ -22,10 +22,10 @@ const Navbar = () => {
             <table>
                 <tr>
                     <td><Link to= "/">Home</Link></td>
-                    <td><Link to="/signup">Signup</Link></td>
-                    <td><Link to= "/new">Create a Story</Link></td>
-                    <td><Link to= "/stories">View Stories</Link></td>
-                    <td><Link to= "/login" onClick={handleDelete()}>Logout</Link></td>
+                    <td><Link to="/signup/">Signup</Link></td>
+                    <td><Link to= "/new/">Create a Story</Link></td>
+                    <td><Link to= "/stories/">View Stories</Link></td>
+                    <td><Link to= "/login/" onClick={()=>handleDelete()}>Logout</Link></td>
                 </tr>
             </table>
 

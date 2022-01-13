@@ -32,7 +32,7 @@ function SignUpForm() {
                 setPasswordConfirmation('')
                 setImageUrl('')
                 setBio('')
-                history('/');
+                history.push('/');
                 setErrors(false)
             }
             else {
