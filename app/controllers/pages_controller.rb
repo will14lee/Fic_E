@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
 
     def index
-        pages=Page.all
-        render json: pages
         # pages= users_pages.all
         # render json: pages
     end

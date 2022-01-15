@@ -6,7 +6,6 @@ class CreateStories < ActiveRecord::Migration[7.0]
       t.string :genre
       t.integer :page_length
       t.string :status
-      t.string :reader_id
       t.string :author_id
 
       t.timestamps

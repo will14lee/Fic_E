@@ -3,9 +3,10 @@ import { Link, useHistory } from 'react-router-dom'
 
 const Home = () => {
     const history= useHistory()
-    const [stories, setStories]= useState(null)
+    const [stories, setStories]= useState("")
     const [about, setAbout]= useState(false)
     const [user, setUser]= useState(false)
+    const [otherStories, setOtherStories]= useState("")
 
     useEffect(() => {
         fetch("/me").then((r)=> {
@@ -25,7 +26,9 @@ const Home = () => {
     function storyForm(story){
         return(
                 <h3 key={story.id}>
+                    {console.log(stories)}
                     <label style={{color:"#2196f3"}}>Title: </label>{story.title}<br/>
+                    {/* <label style={{color:"#2196f3"}}>Title: </label>{story.author.username}<br/> */}
                     <label style={{color:"#1e88e5"}}>Genre: </label>{story.genre}<br/>
                     <label style={{color:"#1976d2"}}>Page Length: </label>{story.pageLength}<br/>
                     <label style={{color:"#1565c0"}}>Status: </label>{story.status}<br/>
@@ -56,7 +59,6 @@ const Home = () => {
             </h3>
         )
     };
-
     return (
         <div className="App">
             <h2>Welcome to Fic. E {user.username}!</h2> ​
@@ -75,7 +77,7 @@ const Home = () => {
             <h2>
                  User's Reading List
             </h2>
-            {stories ? 
+            {stories.length > 0 ? 
             (stories.map((story)=>
              storyForm(story)
             )):
@@ -92,7 +94,7 @@ const Home = () => {
             <h2>
                 User's Stories​
             </h2>
-            {stories ? 
+            {stories.length > 0 ? 
             (stories.map((story)=>
             storyForm(story)
             )):(
