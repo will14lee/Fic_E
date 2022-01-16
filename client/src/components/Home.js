@@ -21,14 +21,31 @@ const Home = () => {
         .then(resp=> resp.json())
         .then(setStories)
         
+        fetch("/story_listings")
+        .then(resp=> resp.json())
+        .then(setOtherStories)
         })}, [])
 
     function storyForm(story){
         return(
                 <h3 key={story.id}>
-                    {console.log(stories)}
                     <label style={{color:"#2196f3"}}>Title: </label>{story.title}<br/>
-                    {/* <label style={{color:"#2196f3"}}>Title: </label>{story.author.username}<br/> */}
+                    <label style={{color:"#1e88e5"}}>Genre: </label>{story.genre}<br/>
+                    <label style={{color:"#1976d2"}}>Page Length: </label>{story.pageLength}<br/>
+                    <label style={{color:"#1565c0"}}>Status: </label>{story.status}<br/>
+                    <label style={{color:"#0d47a1"}}>Premise: </label><br/>
+                    {story.premise}<br/>
+                    <button onClick={()=>{history.push(`/${story.id}/`)}}>Details</button>
+                    <hr/>
+                </h3>
+        );
+    };
+    function otherStoryForm(story){
+        return(
+                <h3 key={story.id}>
+                    {console.log(story)}
+                    <label style={{color:"#2196f3"}}>Title: </label>{story.title}<br/>
+                    <label style={{color:"#2196f3"}}>Author: </label>{story.author.username}<br/>
                     <label style={{color:"#1e88e5"}}>Genre: </label>{story.genre}<br/>
                     <label style={{color:"#1976d2"}}>Page Length: </label>{story.pageLength}<br/>
                     <label style={{color:"#1565c0"}}>Status: </label>{story.status}<br/>
@@ -77,9 +94,9 @@ const Home = () => {
             <h2>
                  User's Reading List
             </h2>
-            {stories.length > 0 ? 
-            (stories.map((story)=>
-             storyForm(story)
+            {otherStories.length > 0 ? 
+            (otherStories.map((story)=>
+             otherStoryForm(story)
             )):
             (<div>
                 <h3>It appears you don't have any stories added to your reading list! 

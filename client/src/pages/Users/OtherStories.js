@@ -5,6 +5,28 @@ const OtherStories = () => {
     const [stories, setStories]= useState("")
     const [user, setUser]= useState(false)
     const history=useHistory()
+
+    function handleSubmit(story){
+        fetch("/story_listings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                listed_story_id: story.id,
+                story_list_id: user.id
+            }),
+        }).then((r)=> {
+            if (r.ok){
+                console.log(r)
+                history.push("/")
+            }
+            else {
+                r.json().then((err)=>console.log(err.errors))
+            }
+        })
+    }
+
     useEffect(() => {
         fetch("/me").then((r)=> {
             if (r.ok) {
@@ -20,6 +42,14 @@ const OtherStories = () => {
         
         })}, [])
 
+
+    function addToReadingList(story){
+        console.log(story.id)
+        handleSubmit(story)
+        // return(
+        // )
+    }
+
     function storyForm(story){
         return(
         <h3 key={story.id}>
@@ -29,8 +59,9 @@ const OtherStories = () => {
             <label style={{color:"#1976d2"}}>Page Length:</label> {story.pageLength}<br/>
             <label style={{color:"#1565c0"}}>Status:</label> {story.status}<br/>
             <label style={{color:"#0d47a1"}}>Premise:</label><br/>
-            {story.premise}
-            <br/>
+            {story.premise}<br/>
+            <button onClick={(e)=>addToReadingList(story)}>Add to Reading List</button>
+
       </h3>
         )
     }
@@ -47,11 +78,9 @@ const OtherStories = () => {
              storyForm(story)
             )):
             (<div>
-                <h3>It appears you don't have any stories added to your reading list! 
+                <h3>Wow! Would you look at that! It's completely empty! 
                     <br/>
-                    You can fix that by clicking <Link to="/stories/">here</Link> to browse through our collection 
-                    <br/>
-                    of stories by other authors and adding them to this list!
+                    You can fix this by clicking <Link to="/new/">here</Link> to be number #1 and create a story! 
                     <br/>
                 </h3>
                 </div>
