@@ -31,8 +31,6 @@ class ChaptersController < ApplicationController
     
     def destroy
         chapter= this_chapter
-        byebug
-
         chapter.destroy
         head :no_content
     end

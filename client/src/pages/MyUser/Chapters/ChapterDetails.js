@@ -40,32 +40,30 @@ const ChapterDetails = () => {
         )
     }
     function pageForm(page){
-        const pageNumber=0
         return(
             <div key={page.id}>
-                {pageNumber++}
-                <p>Page Number: {pageNumber}</p>
-                <p>Text: {page.text}</p>
-                <p>Notes: {page.notes}</p>
-                <button onClick={()=>history.push(`pages/new`)}>Page Details</button>
-                <button onClick={()=>history.push(`pages/new`)}>Edit Page</button>
-                <button onClick={()=>history.push(`pages/new`)}>Delete Page</button>
+                <p>Page Number: {pages.length}</p>
+                <h3>Text:</h3> 
+                <p>{page.text}</p>
+                <h3>Notes:</h3> 
+                <p>{page.notes}</p>
+                <button onClick={()=>history.push(`pages/${page.id}`)}>Page Details</button>
                 <hr/>
             </div>
         )
     }
-    console.log(pages)
     return (
         <div>
             <h2>Chapter Details</h2>
             {chapterForm(chapters)}
             <h2>Pages</h2>
+            <hr/>
             {pages.length > 0 ? 
             (pages.map((page)=>
             pageForm(page)
             )):(
                 <h3>
-                    It appears you didn't write any pages yet. Write some <Link to ="/new/">here.</Link> 
+                    It appears you didn't write any pages yet. Write some <Link to ="pages/new/">here.</Link> 
                 </h3>
             )}
         </div>

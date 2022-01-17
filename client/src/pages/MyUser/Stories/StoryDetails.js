@@ -55,8 +55,8 @@ function StoryDetails() {
             <h4>Premise:</h4>
             <p>{story.premise}</p>
             <p>
-                <button onClick={()=>history.push(`/${params.id}/edit`)}>Edit  </button>
-                <button onClick={()=>history.push(`/${params.id}/chapters/new`)}>Write a Chapter</button>
+                <button onClick={()=>history.push(`/${params.id}/edit/`)}>Edit  </button>
+                <button onClick={()=>history.push(`${params.id}/chapters/new/`)}>Write a Chapter</button>
                 <button onClick={()=>handleDelete()}>Delete</button><br/>
                 <button onClick={()=>history.push(`/`)}>Return  </button>
             </p>

@@ -31,8 +31,6 @@ class PagesController < ApplicationController
     
     def destroy
         page= this_page
-        byebug
-
         page.destroy
         head :no_content
     end
@@ -51,13 +49,13 @@ class PagesController < ApplicationController
     def user_pages
         user= User.find_by(id: session[:user_id])
         story= user.authored_stories.find_by(id: params[:story_id])
-        story.pages
+        story.chapters.find_by(id: [params[:chapter_id]]).pages
     end
     
     def this_page
         user_pages.find_by(id: params[:id])
     end
     def page_params
-        params.permit(:id, :text, :notes, :chapter_id, :story_id)
+        params.permit(:id, :text, :notes, :chapter_id)
     end
 end

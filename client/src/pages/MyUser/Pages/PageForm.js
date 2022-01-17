@@ -1,15 +1,39 @@
 import React, {useState, useEffect} from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams, useHistory} from 'react-router-dom'
 const PageForm = () => {
     const [text, setText]= useState()
     const [notes, setNotes]=useState()
+    const params= useParams()
+    const history= useHistory()
+
+    function handleSubmit(){
+        fetch(`/stories/${params.story_id}/chapters/${params.id}/pages`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                text,
+                notes,
+            }),
+        }).then((r)=> {
+            if (r.ok){
+                history.push(`/${params.story_id}/chapters/${params.id}/`)
+                console.log(r)
+            }
+            else {
+                r.json().then((err)=>console.log(err.errors))
+            }
+        })
+    }
+
     return (
         <div>
             <h3>Let's Write!</h3>
-            <textarea value={text} rows="40" cols="100"></textarea>
+            <textarea value={text} rows="40" cols="100" onChange={(e)=>setText(e.target.value)}></textarea>
             <p>Notes</p>
-            <textarea value={notes}rows="20" cols="100"></textarea><br/>
-            <button>Submit</button>
+            <textarea value={notes}rows="20" cols="100" onChange={(e)=>setNotes(e.target.value)}></textarea><br/>
+            <button onClick={()=>handleSubmit()}>Submit</button>
             <button>Write Next Page</button><br/>
             <button>Return</button>
         </div>
