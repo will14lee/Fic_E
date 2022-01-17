@@ -12,11 +12,11 @@ import EditStory from "../pages/MyUser/Stories/EditStory";
 import ChapterForm from "../pages/MyUser/Chapters/ChapterForm";
 import ChapterDetails from "../pages/MyUser/Chapters/ChapterDetails";
 import EditChapter from "../pages/MyUser/Chapters/EditChapter";
-import PagesIndex from "../pages/MyUser/Pages/PagesIndex";
 import PageForm from "../pages/MyUser/Pages/PageForm";
 import PageDetails from "../pages/MyUser/Pages/PageDetails";
 import EditPage from "../pages/MyUser/Pages/EditPage";
 import OtherStories from "../pages/Users/OtherStories";
+import OtherStoryDetails from "../pages/Users/OtherStoryDetails";
 import OtherChapters from "../pages/Users/OtherChapters";
 import OtherPages from "../pages/Users/OtherPages";
 import OtherPageDetails from "../pages/Users/OtherPageDetails";
@@ -42,15 +42,15 @@ function App() {
           <Route exact path= "/:id/edit"> <EditStory/> </Route>
           <Route exact path= "/:story_id/chapters/:id/pages/new"> <PageForm/> </Route>
           <Route exact path= "/:story_id/chapters/:id/edit"> <EditChapter/> </Route>
-          <Route exact path= "/:story_id/chapters/:id/pages"> <PagesIndex/> </Route>
           <Route exact path= "/:story_id/chapters/:id"> <ChapterDetails/> </Route>
           <Route exact path= "/:story_id/chapters/:chapter_id/pages/:id/edit"> <EditPage/> </Route>
           <Route exact path= "/:story_id/chapters/:chapter_id/pages/:id">  <PageDetails/> </Route>
+          <Route exact path= "/stories/:username/:id"> <OtherStoryDetails/> </Route>
           <Route exact path= "/stories"> <OtherStories/> </Route>
           <Route exact path= "/stories/:id/chapters"> <OtherChapters/> </Route>
           <Route exact path= "/stories/:story_id/chapters/:id"> <OtherPages/> </Route>
           <Route exact path= "/stories/:story_id/chapters/:chapter_id/pages/:id"> <OtherPageDetails/> </Route>
-          <Route exact path= "original_chapter/new"> <OriginalChapterForm/> </Route>
+          <Route exact path= "/stories/:username/:id/original_chapter/new"> <OriginalChapterForm/> </Route>
           <Route exact path= "/original_chapter/:id/details"> <OriginalChapterDetails/> </Route>
           <Route exact path= "original_chapter/:id/edit"> <EditOriginalChapter/> </Route>
           <Route exact path= "/original_chapter/:chapter_id/pages/new"> <OriginalPageForm/> </Route>

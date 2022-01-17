@@ -74,15 +74,20 @@ const EditStory = () => {
     return (
         <div>
             <h3>Edit Story</h3>
-            <p><label>Title</label><input placeholder={stories.title} onChange={(e)=>setNewTitle(e.target.value)}/></p>
+            <p><label>Title</label><input key={stories.id} placeholder={stories.title} onChange={(e)=>setNewTitle(e.target.value)}/></p>
             <p><label>Premise</label></p>
-            <p><textarea rows="5" cols="40" placeholder={stories.premise} onChange={(e)=>setNewPremise(e.target.value)}/></p>
+            <p><textarea rows="5" cols="40" key={stories.id} placeholder={stories.premise} onChange={(e)=>setNewPremise(e.target.value)}/></p>
             <p>
             {genreForm()}
-            <button onClick={()=>{addGenre()}}>Add genre</button>
+            {/* <button onClick={()=>{addGenre()}}>Add genre</button> */}
             </p>
-            {addGenre()}
-            <p>Status: <input value={stories.status} onChange={(e)=>setNewStatus(e.target.value)} placeholder={stories.status}/></p>
+            {/* {genres > 3 ? (<br/>) : (<><button onClick={()=>{setGenres(genres + 1)}}>Add genre</button><br/></>)} */}
+            {/* {genres > 0 ? (<>{addGenre()}<br/></>):(<></>)}
+            {genres > 1 ? (<>{addGenre()}<br/></>):(<></>)}
+            {genres > 2 ? (<>{addGenre()}<br/></>):(<></>)}
+            {genres > 3 ? (<>{addGenre()}<br/></>):(<></>)}
+            {genres > 3 ? (<>You should not exceed more than 5 genres!<br/></>):(<></>)} */}
+            <p>Status: <input onChange={(e)=>setNewStatus(e.target.value)} placeholder={stories.status}/></p>
             <p><button type='submit' onClick={()=>handleSubmit()}>Create</button></p>
         </div>
     )

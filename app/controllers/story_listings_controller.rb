@@ -1,4 +1,12 @@
 class StoryListingsController < ApplicationController  
+    before_action :authorize
+    skip_before_action :authorize, only: [:other_story_show]
+    
+    def other_story_show
+        story= Story.all.find_by(id: params[:id])
+        render json: story
+    end
+
     def index
         stories=listed_stories.map{|m| m.listed_story}
         render json: stories

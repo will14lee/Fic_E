@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
 
-function StoryDetails() {
+function OtherStoryDetails() {
     const [stories, setStories]= useState("")
     const [users, setUsers]= useState("")
     const [chapters, setChapters]= useState("")
@@ -10,11 +10,11 @@ function StoryDetails() {
     const params= useParams()
 
     useEffect(()=>{
-        fetch(`/stories/${params.id}`)
+        fetch(`/other_story/${params.id}`)
         .then(resp=> resp.json())
         .then(setStories)
         
-        fetch(`/stories/${params.id}/chapters`)
+        fetch(`/${params.username}/${params.id}/other_chapters`)
         .then(resp=> resp.json())
         .then(setChapters)
 
@@ -55,9 +55,7 @@ function StoryDetails() {
             <h4>Premise:</h4>
             <p>{story.premise}</p>
             <p>
-                <button onClick={()=>history.push(`/${params.id}/edit`)}>Edit  </button>
-                <button onClick={()=>history.push(`/${params.id}/chapters/new`)}>Write a Chapter</button>
-                <button onClick={()=>handleDelete()}>Delete</button><br/>
+                <button onClick={()=>history.push(`original_chapter/new`)}>Write Your Own Chapter</button>
                 <button onClick={()=>history.push(`/`)}>Return  </button>
             </p>
         </div>
@@ -78,7 +76,6 @@ function StoryDetails() {
 
     }
 
-console.log(chapters)
     return (
         <div>
             {
@@ -86,8 +83,7 @@ console.log(chapters)
                     <>
                     {storyForm(stories)}
                     <h2>Chapters</h2>
-                    
-                    {chapters.length > 0 ? (chapters.map((chapter)=>
+                    {chapters ? (chapters.map((chapter)=>
                     chapterForm(chapter))):(<></>)}
                     </>
                     ) : (
@@ -99,4 +95,4 @@ console.log(chapters)
         )
             }
 
-export default StoryDetails
+export default OtherStoryDetails

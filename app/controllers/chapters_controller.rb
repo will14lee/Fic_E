@@ -1,40 +1,39 @@
 class ChaptersController < ApplicationController
-    # before_action :authorize
-  
-    def index
-        chapters=Chapter.all
+    before_action :authorize
+    skip_before_action :authorize, only: [:other_story_show]
+
+    
+    def other_chapters_index
+        chapters= other_user_chapters
         render json: chapters
-        # chapters= users_chapters.all
-        # render json: chapters
+    end
+    
+    def index
+        chapters= user_chapters
+        render json: chapters
     end
     
     def show
-        chapter=Chapter.find_by(id: params[:id])
+        chapter= this_chapter
         render json: chapter
-        # chapter= this_chapter
-        # render json: chapter
     end
     
     def update
-        chapter=Chapter.find_by(id: params[:id])
-        Chapter.update(chapter_params)
+        chapter= this_chapter
+        chapter.update(chapter_params)
         render json: chapter
-        # chapter= this_chapter
-        # Chapter.update(chapter_params)
-        # render json: chapter
     end
     
     def create
         chapter= Chapter.create(chapter_params)
         render json: chapter
-        # chapter= users_chapters.create(chapter_params)
-        # render json: chapter, status: :created
     end
     
     def destroy
-        chapter=Chapter.find_by(id: params[:id])
-        # chapter= this_chapter
-        Chapter.destroy
+        chapter= this_chapter
+        byebug
+
+        chapter.destroy
         head :no_content
     end
     
@@ -43,14 +42,21 @@ class ChaptersController < ApplicationController
       render json: { errors: "Not authorized"}, status: :unauthorized unless session.include? :user_id
     end
 
-    # def users_chapters
-    #     user= User.find_by(id: session[:user_id])
-    #     user.chapters
-    # end
+    def other_user_chapters
+        user= User.find_by(username: params[:username])
+        story= user.authored_stories.find_by(id: params[:id])
+        story.chapters
+    end
+
+    def user_chapters
+        user= User.find_by(id: session[:user_id])
+        story= user.authored_stories.find_by(id: params[:story_id])
+        story.chapters
+    end
     
-    # def this_chapter
-    #     users_chapters.find_by(id: params[:id])
-    # end
+    def this_chapter
+        user_chapters.find_by(id: params[:id])
+    end
     def chapter_params
         params.permit(:id, :title, :summary, :characters, :story_id)
     end

@@ -1,12 +1,31 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
 const ChapterForm = () => {
     const history=useHistory()
+    const [users, setUsers]= useState("")
     const [title, setTitle]= useState("")
     const [summary, setSummary]= useState("")
     const [characters, setCharacters]= useState("")
-    const params=useParams()
+    const [stories, setStories]= useState("")
+    const params=useParams("")
+
+    useEffect(()=>{
+        fetch(`/stories/${params.id}`)
+        .then(resp=> resp.json())
+        .then(setStories)
+        
+        fetch("/me")
+        .then((r) => {
+            if (r.ok) {
+              r.json().then((user) => setUsers(user));
+            }
+            else {
+                history.push('/login')
+            }
+          })
+    }, [])
+
     function handleSubmit(){
         fetch(`/stories/${params.id}/chapters`, {
             method: "POST",
@@ -30,7 +49,7 @@ const ChapterForm = () => {
     }
     return (
         <div>
-            <h3>New Chapter</h3>
+            <h3>{stories.title}'s New Chapter</h3>
             <p><label>Title</label><input value={title} onChange={(e)=> setTitle(e.target.value)} placeholder='Chapter 1: He Ate What?!'/></p>
             <p><label>Summary</label></p>
             <p><textarea  value={summary} onChange={(e)=>setSummary(e.target.value)} rows="5" cols="40" placeholder='If he really wanted peace he really should not have eaten that Taco Bell..'/></p>

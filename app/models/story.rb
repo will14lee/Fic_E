@@ -3,6 +3,6 @@ class Story < ApplicationRecord
     has_many :lists, through: :story_listings, source: :story_list
     belongs_to :author, class_name: "User"
 
-    has_many :chapters
+    has_many :chapters, dependent: :destroy
     has_many :pages, through: :chapters
 end

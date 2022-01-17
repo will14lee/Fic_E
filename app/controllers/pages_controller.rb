@@ -1,55 +1,63 @@
 class PagesController < ApplicationController
+    before_action :authorize
+    # skip_before_action :authorize, only: [:other_pages_show]
 
+    
+    # def other_pages_index
+    #     pages= other_user_pages
+    #     render json: pages
+    # end
+    
     def index
-        # pages= users_pages.all
-        # render json: pages
+        pages= user_pages
+        render json: pages
     end
-        
+    
     def show
-        page=Page.find_by(id: params[:id])
+        page= this_page
         render json: page
-        # page= this_page
-        # render json: page
     end
-        
+    
     def update
-        page=Page.find_by(id: params[:id])
-        Page.update(page_params)
+        page= this_page
+        page.update(page_params)
         render json: page
-        # page= this_page
-        # Page.update(page_params)
-        # render json: page
     end
-        
+    
     def create
         page= Page.create(page_params)
         render json: page
-        # page= users_pages.create(page_params)
-        # render json: page, status: :created
     end
-        
+    
     def destroy
-        page=Page.find_by(id: params[:id])
-        # page= this_page
-        Page.destroy
+        page= this_page
+        byebug
+
+        page.destroy
         head :no_content
     end
-        
+    
     private
     def authorize
-        render json: { errors: "Not authorized"}, status: :unauthorized unless session.include? :user_id
+      render json: { errors: "Not authorized"}, status: :unauthorized unless session.include? :user_id
+    end
+
+    def other_user_pages
+        user= User.find_by(username: params[:username])
+        story= user.authored_stories.find_by(id: params[:id])
+        story.pages
+    end
+
+    def user_pages
+        user= User.find_by(id: session[:user_id])
+        story= user.authored_stories.find_by(id: params[:story_id])
+        story.pages
     end
     
-    # def users_pages
-    #     user= User.find_by(id: session[:user_id])
-    #     user.pages
-    # end
-        
-    # def this_page
-    #     users_pages.find_by(id: params[:id])
-    # end
+    def this_page
+        user_pages.find_by(id: params[:id])
+    end
     def page_params
-        params.permit(:text, :notes)
+        params.permit(:id, :text, :notes, :chapter_id, :story_id)
     end
-    
 end
