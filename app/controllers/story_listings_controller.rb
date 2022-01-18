@@ -28,7 +28,7 @@ class StoryListingsController < ApplicationController
     
     def destroy
         story= this_story
-        story.destroy
+        story.delete
         head :no_content
     end
     

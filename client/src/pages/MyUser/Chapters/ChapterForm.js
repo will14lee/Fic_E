@@ -39,7 +39,7 @@ const ChapterForm = () => {
             }),
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.id}`)
+                history.push(`/${params.id}/`)
                 console.log(r)
             }
             else {

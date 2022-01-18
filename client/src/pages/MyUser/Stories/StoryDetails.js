@@ -56,7 +56,7 @@ function StoryDetails() {
             <p>{story.premise}</p>
             <p>
                 <button onClick={()=>history.push(`/${params.id}/edit/`)}>Edit  </button>
-                <button onClick={()=>history.push(`${params.id}/chapters/new/`)}>Write a Chapter</button>
+                <button onClick={()=>history.push(`chapters/new/`)}>Write a Chapter</button>
                 <button onClick={()=>handleDelete()}>Delete</button><br/>
                 <button onClick={()=>history.push(`/`)}>Return  </button>
             </p>
@@ -86,7 +86,7 @@ console.log(chapters)
                     <>
                     {storyForm(stories)}
                     <h2>Chapters</h2>
-                    
+                    <hr/>
                     {chapters.length > 0 ? (chapters.map((chapter)=>
                     chapterForm(chapter))):(<></>)}
                     </>

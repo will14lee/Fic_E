@@ -8,6 +8,7 @@ const ChapterDetails = () => {
     const [pages, setPages]=useState("")
     const [chapters, setChapters]=useState("")
     const [users, setUsers]= useState("")
+
     useEffect(()=>{
         fetch(`/stories/${params.story_id}/chapters/${params.id}/pages`)
         .then(resp=> resp.json())
@@ -28,13 +29,31 @@ const ChapterDetails = () => {
           })
     }, [])
 
+    function handleDelete(){
+        fetch(`/stories/${params.story_id}/chapters/${params.id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }).then((r)=> {
+            if (r.ok){
+                history.push(`/${params.story_id}/`)
+            }else {
+                r.json().then((err)=>console.log(err.errors))
+            }
+        })
+    }
+
     function chapterForm(chapter){
         return(
             <div key={chapter.id}>
                 <p>Title: {chapter.title}</p>
                 <p>Summary: {chapter.summary}</p>
                 <p>Characters: {chapter.characters}</p>
-                <button onClick={()=>history.push(`pages/new`)}>Write a Page</button>
+                <button onClick={()=>history.push(`edit/`)}>Edit Chapter</button><br/>
+                <button onClick={()=>handleDelete()}>Delete Chapter</button><br/>
+                <button onClick={()=>history.push(`pages/new`)}>Write a Page</button><br/>
+                <button onClick={()=>history.push(`/${params.story_id}/`)}>Return  </button>
                 <hr/>
             </div>
         )

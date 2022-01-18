@@ -20,6 +20,7 @@ const Navbar = () => {
     return (
         <div className="App">
             <table>
+                <tbody>
                 <tr>
                     <td><Link to= "/">Home</Link></td>
                     <td><Link to="/signup/">Signup</Link></td>
@@ -27,6 +28,7 @@ const Navbar = () => {
                     <td><Link to= "/stories/">View Stories</Link></td>
                     <td><Link to= "/login/" onClick={()=>handleDelete()}>Logout</Link></td>
                 </tr>
+                </tbody>
             </table>
 
         </div>

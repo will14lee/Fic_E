@@ -7,7 +7,6 @@ const Home = () => {
     const [about, setAbout]= useState(false)
     const [user, setUser]= useState(false)
     const [otherStories, setOtherStories]= useState("")
-
     useEffect(() => {
         fetch("/me").then((r)=> {
             if (r.ok) {

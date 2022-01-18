@@ -31,7 +31,7 @@ function OtherStoryDetails() {
 
     
     function handleDelete(){
-        fetch(`/stories/${params.id}`, {
+        fetch(`/story_listings/${params.id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -55,7 +55,8 @@ function OtherStoryDetails() {
             <h4>Premise:</h4>
             <p>{story.premise}</p>
             <p>
-                <button onClick={()=>history.push(`original_chapter/new`)}>Write Your Own Chapter</button>
+                <button onClick={()=>history.push(`original_chapter/new`)}>Write Your Own Chapter</button><br/>
+                <button onClick={()=>handleDelete()}>Remove From Reading List</button><br/>
                 <button onClick={()=>history.push(`/`)}>Return  </button>
             </p>
         </div>
