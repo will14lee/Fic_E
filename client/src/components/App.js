@@ -43,8 +43,8 @@ function App() {
           <Route exact path= "/:story_id/chapters/:id/pages/new"> <PageForm/> </Route>
           <Route exact path= "/:story_id/chapters/:id/edit"> <EditChapter/> </Route>
           <Route exact path= "/:story_id/chapters/:id"> <ChapterDetails/> </Route>
-          <Route exact path= "/:story_id/chapters/:chapter_id/pages/:id/edit"> <EditPage/> </Route>
           <Route exact path= "/:story_id/chapters/:chapter_id/pages/:id">  <PageDetails/> </Route>
+          <Route exact path= "/:story_id/chapters/:chapter_id/pages/:id/edit"> <EditPage/> </Route>
           <Route exact path= "/stories/:username/:id"> <OtherStoryDetails/> </Route>
           <Route exact path= "/stories"> <OtherStories/> </Route>
           <Route exact path= "/stories/:id/chapters"> <OtherChapters/> </Route>

@@ -66,7 +66,7 @@ const ChapterDetails = () => {
                 <p>{page.text}</p>
                 <h3>Notes:</h3> 
                 <p>{page.notes}</p>
-                <button onClick={()=>history.push(`pages/${page.id}`)}>Page Details</button>
+                <button onClick={()=>history.push(`pages/${page.id}/`)}>Page Details</button>
                 <hr/>
             </div>
         )

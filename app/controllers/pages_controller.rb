@@ -25,6 +25,9 @@ class PagesController < ApplicationController
     end
     
     def create
+        user= User.find_by(id: session[:user_id])
+        story= user.authored_stories.find_by(id: params[:story_id])
+        story.increment(:page_length).save
         page= Page.create(page_params)
         render json: page
     end

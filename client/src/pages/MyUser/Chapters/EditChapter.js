@@ -38,7 +38,7 @@ const EditChapter = () => {
             }),
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.story_id}/chapters/${params.id}`)
+                history.push(`/${params.story_id}/chapters/${params.id}/`)
                 console.log(r)
             }
             else {
@@ -55,7 +55,7 @@ const EditChapter = () => {
             <p><label>Characters</label></p>
             <p><textarea value={newCharacters} rows="5" cols="40" onChange={(e)=> setNewCharacters(e.target.value)} placeholder={chapters.characters}/></p>
             <p><button type='submit' onClick={()=>handleSubmit()}>Edit</button><br/>
-            <button onClick={()=>history.push(`/${params.story_id}/chapters/${params.id}`)}>Return</button></p>
+            <button onClick={()=>history.push(`/${params.story_id}/chapters/${params.id}/`)}>Return</button></p>
         </div>
     )
 }

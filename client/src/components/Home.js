@@ -30,7 +30,7 @@ const Home = () => {
                 <h3 key={story.id}>
                     <label style={{color:"#2196f3"}}>Title: </label>{story.title}<br/>
                     <label style={{color:"#1e88e5"}}>Genre: </label>{story.genre}<br/>
-                    <label style={{color:"#1976d2"}}>Page Length: </label>{story.pageLength}<br/>
+                    <label style={{color:"#1976d2"}}>Page Length: </label>{story.page_length}<br/>
                     <label style={{color:"#1565c0"}}>Status: </label>{story.status}<br/>
                     <label style={{color:"#0d47a1"}}>Premise: </label><br/>
                     {story.premise}<br/>
@@ -45,7 +45,7 @@ const Home = () => {
                     <label style={{color:"#008200"}}>Title: </label>{story.title}<br/>
                     <label style={{color:"#00fa9a"}}>Author: </label>{story.author.username}<br/>
                     <label style={{color:"#7cfc00"}}>Genre: </label>{story.genre}<br/>
-                    <label style={{color:"#3cb371"}}>Page Length: </label>{story.pageLength}<br/>
+                    <label style={{color:"#3cb371"}}>Page Length: </label>{story.page_length}<br/>
                     <label style={{color:"#2e8b57"}}>Status: </label>{story.status}<br/>
                     <label style={{color:"#03C03C"}}>Premise: </label><br/>
                     {story.premise}<br/>
