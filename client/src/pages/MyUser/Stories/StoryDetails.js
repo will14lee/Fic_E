@@ -6,6 +6,8 @@ function StoryDetails() {
     const [stories, setStories]= useState("")
     const [users, setUsers]= useState("")
     const [chapters, setChapters]= useState("")
+    const [longerPremise, setLongerPremise]= useState("")
+    const [longerSummary, setLongerSummary]= useState("")
     const history= useHistory()
     const params= useParams()
 
@@ -53,7 +55,17 @@ function StoryDetails() {
             <h4>Page Length: { story.page_length}</h4>
             <h4>Status: {story.status}</h4>
             <h4>Premise:</h4>
-            <p>{story.premise}</p>
+            {story.premise ? (
+                <>
+                {longerPremise==story.id ? (<p>{story.premise}<br/><a onClick={()=>setLongerPremise("")}>Less...</a></p>):(
+                    <>
+                    {story.premise.length > 25 ? (
+                        <p>{story.premise.slice(0,25) + "..."} <br/><a onClick={()=>setLongerPremise(story.id)}>More...</a></p>
+                        ):(<p>{story.premise}</p>)} 
+                    </>
+                )}
+                </>
+            ):(<br/>)}
             <p>
                 <button onClick={()=>history.push(`/stories/${params.story_id}/edit`)}>Edit  </button>
                 <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/new`)}>Write a Chapter</button>
@@ -68,17 +80,27 @@ function StoryDetails() {
     function chapterForm(chapter){
         return(
             <div key={chapter.id}>
-                <p>Title: {chapter.title}</p>
-                <p>Summary: {chapter.summary}</p>
-                <p>Characters: {chapter.characters}</p>
+                <h3>Title: {chapter.title}</h3>
+                <h3>Summary:</h3>
+                {chapter.summary ? (
+                <>{longerSummary==chapter.id ? (<p>{chapter.summary}<br/><a onClick={()=>setLongerSummary("")}>Less...</a></p>):(
+                    <>
+                    {chapter.summary.length > 25 ? (
+                        <p>{chapter.summary.slice(0,25) + "..."} <br/><a onClick={()=>setLongerSummary(chapter.id)}>More...</a></p>
+                        ):(<p>{chapter.summary}</p>)} 
+                    </>
+                )}</>):(<br/>)}
+                {/* {stories.listed_story.author.username==chapter.author.username ? (<></>):(<>
+                <p>{chapter.author.username==users.username ? (<>Chapter Author: Me!</>) : (<>Chapter Author: {chapter.author.username}</>)}</p>
+                </>)} */}
+                <h3>Characters: {chapter.characters}</h3>
                 <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${chapter.id}`)}>Chapter Details</button>
                 <hr/>
             </div>
         )
 
     }
-
-console.log(chapters)
+    console.log(chapters)
     return (
         <div>
             {
@@ -88,7 +110,7 @@ console.log(chapters)
                     <h2>Chapters</h2>
                     <hr/>
                     {chapters.length > 0 ? (chapters.map((chapter)=>
-                    chapterForm(chapter))):(<></>)}
+                    chapterForm(chapter))):(<p>No Chapters!</p>)}
                     </>
                     ) : (
                     <div>

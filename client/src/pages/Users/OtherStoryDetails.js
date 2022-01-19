@@ -49,6 +49,7 @@ function OtherStoryDetails() {
         return(
         <div>
             <h2>{story.listed_story.title}</h2>
+            <button onClick={()=>history.push("")}>Return</button>
             <h4>Genre: {story.listed_story.genre}</h4>
             <h4>Author: {story.listed_story.author.username}</h4>
             <h4>Page Length: { story.listed_story.page_length}</h4>
@@ -73,7 +74,15 @@ function OtherStoryDetails() {
                 </>)}
                 <p>Summary: {chapter.summary}</p>
                 <p>Characters: {chapter.characters}</p>
+                {stories.listed_story.author.username==chapter.author.username ? (
+                <button onClick={()=>history.push(`/other_stories/${params.story_id}/users/${params.user_id}/chapters/${chapter.id}`)}>Chapter Details</button>):(<>
+                <p>{chapter.author.username==users.username ? (
+                <button onClick={()=>history.push(`/other_stories/${params.story_id}/users/${params.user_id}/original_chapters/${chapter.id}/my_users/${users.id}`)}>My Chapter Details</button>
+                ) : (
                 <button onClick={()=>history.push(`/other_stories/${params.story_id}/users/${params.user_id}/chapters/${chapter.id}`)}>Chapter Details</button>
+                )}</p>
+                </>)}
+
                 <hr/>
             </div>
         )

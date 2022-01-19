@@ -8,6 +8,11 @@ class ChaptersController < ApplicationController
         render json: chapters
     end
     
+    def other_chapters_show
+        chapters= other_user_chapters.find_by(id: params[:id])
+        render json: chapters
+    end
+
     def index
         chapters= user_chapters
         render json: chapters

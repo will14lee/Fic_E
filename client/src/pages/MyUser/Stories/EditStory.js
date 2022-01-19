@@ -88,7 +88,9 @@ const EditStory = () => {
             {genres > 3 ? (<>{addGenre()}<br/></>):(<></>)}
             {genres > 3 ? (<>You should not exceed more than 5 genres!<br/></>):(<></>)} */}
             <p>Status: <input onChange={(e)=>setNewStatus(e.target.value)} placeholder={stories.status}/></p>
-            <p><button type='submit' onClick={()=>handleSubmit()}>Create</button></p>
+            <p><button type='submit' onClick={()=>handleSubmit()}>Create</button><br/>
+            <button onClick={()=>history.push(`/stories/${params.story_id}`)}>Return</button>
+            </p>
         </div>
     )
 }

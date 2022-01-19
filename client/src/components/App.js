@@ -48,16 +48,16 @@ function App() {
 
           <Route exact path= "/other_stories"> <OtherStories/> </Route>
           <Route exact path= "/other_stories/:story_id/users/:user_id"> <OtherStoryDetails/> </Route>
-          <Route exact path= "/other_stories/:story_id/users/:user_id/chapters/:id"> <OtherChapterDetails/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/chapters/:chapter_id"> <OtherChapterDetails/> </Route>
           <Route exact path= "/other_stories/:story_id/users/:user_id/chapters/:chapter_id/pages/:id"> <OtherPageDetails/> </Route>
 
           <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/new"> <OriginalChapterForm/> </Route>
-          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:id"> <OriginalChapterDetails/> </Route>
-          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:id/edit"> <EditOriginalChapter/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/my_users/:my_user_id"> <OriginalChapterDetails/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/my_users/:my_user_id/edit"> <EditOriginalChapter/> </Route>
 
-          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/pages/new"> <OriginalPageForm/> </Route>
-          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/pages/:id"> <OriginalPageDetails/> </Route>
-          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/pages/:id/edit"> <EditOriginalPage/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/my_users/:my_user_id/pages/new"> <OriginalPageForm/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/my_users/:my_user_id/pages/:id"> <OriginalPageDetails/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/my_users/:my_user_id/pages/:id/edit"> <EditOriginalPage/> </Route>
           <Route exact path="/">  <Home/>  </Route>
         </Switch>
         <Navbar/>

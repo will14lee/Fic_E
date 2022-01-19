@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     end  
   end
 
+get '/other_stories/:story_id/users/:user_id/other_chapters/:chapter_id/pages', to: 'pages#other_pages_index'
+get '/other_stories/:story_id/users/:user_id/other_chapters/:chapter_id/pages/:id', to: 'pages#other_pages_show'
+get '/other_stories/:story_id/users/:user_id/other_chapters/:id', to: 'chapters#other_chapters_show'
 get '/other_stories/:story_id/users/:user_id/other_chapters', to: 'chapters#other_chapters_index'
 get '/other_stories/:id', to: 'story_listings#other_story_show'
 get '/all_stories', to: 'stories#stories_index'

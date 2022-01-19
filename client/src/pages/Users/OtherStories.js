@@ -102,7 +102,6 @@ const OtherStories = () => {
                 </h3>
                 </div>
             )}
-         
         </div>
     )
 }

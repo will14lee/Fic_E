@@ -10,6 +10,8 @@ const ChapterDetails = () => {
     const [users, setUsers]= useState("")
     const [longerText, setLongerText]=useState("")
     const [longerNotes, setLongerNotes]=useState("")
+    const [longerSummary, setLongerSummary]=useState("")
+
 
     useEffect(()=>{
         fetch(`/stories/${params.story_id}/chapters/${params.id}/pages`)
@@ -50,6 +52,17 @@ const ChapterDetails = () => {
         return(
             <div key={chapter.id}>
                 <p>Title: {chapter.title}</p>
+                {chapter.summary ? (
+                <>
+                    {longerSummary==chapter.id ? (<>{chapter.summary}<br/><a onClick={()=>setLongerSummary("")}>Less...</a></>):(
+                        <>
+                        {chapter.summary.length > 25 ? (
+                            <p>{chapter.summary.slice(0,25) + "..."} <br/><a onClick={()=>setLongerSummary(chapter.id)}>More...</a></p>
+                            ):(<p>{chapter.summary}</p>)} 
+                        </>
+                    )}
+                </>
+                ):(<></>)}
                 <p>Summary: {chapter.summary}</p>
                 <p>Characters: {chapter.characters}</p>
                 <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${chapter.id}/edit`)}>Edit Chapter</button><br/>

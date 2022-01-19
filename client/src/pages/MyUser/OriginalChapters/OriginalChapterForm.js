@@ -40,7 +40,7 @@ const OriginalChapterForm = () => {
             }),
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.id}/`)
+                history.push(`/other_stories/${params.story_id}/users/${params.user_id}`)
                 console.log(r)
             }
             else {
@@ -50,13 +50,15 @@ const OriginalChapterForm = () => {
     }
     return (
         <div>
-            <h3>{otherStories.title}'s New Chapter</h3>
+            {otherStories ? (<h3>Original Chapter for {otherStories.listed_story.title}</h3>) : (<>Nothing Here!</>)}
             <p><label>Title</label><input value={title} onChange={(e)=> setTitle(e.target.value)} placeholder='Chapter 1: He Ate What?!'/></p>
             <p><label>Summary</label></p>
             <p><textarea  value={summary} onChange={(e)=>setSummary(e.target.value)} rows="5" cols="40" placeholder='If he really wanted peace he really should not have eaten that Taco Bell..'/></p>
             <p><label>Characters</label></p>
             <p><textarea value={characters} rows="5" cols="40" onChange={(e)=> setCharacters(e.target.value)} placeholder='Romeo, Juliet, San Juan the Goat Slayer'/></p>
-            <p><button type='submit' onClick={()=>handleSubmit()}>Create</button></p>
+            <p><button type='submit' onClick={()=>handleSubmit()}>Create</button><br/>
+            <button onClick={()=>history.push(`/other_stories/${params.story_id}/users/${params.user_id}`)}>Return</button></p>
+
         </div>
     )
 }

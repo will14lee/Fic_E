@@ -1,11 +1,21 @@
 import React, {useState, useEffect} from 'react'
-import { useLocation, useParams, useHistory} from 'react-router-dom'
+import { useParams, useHistory} from 'react-router-dom'
 const PageForm = () => {
     const [text, setText]= useState("")
     const [notes, setNotes]=useState("")
+    const [user, setUser]=useState("")
     const params= useParams()
     const history= useHistory()
 
+    useEffect(() => {
+        fetch("/me").then((r)=> {
+            if (r.ok) {
+                r.json().then((user)=> setUser(user))
+            }
+            else{
+                history.push('/login')
+            }
+        })}, [])
     function nextPage(){
         fetch(`/stories/${params.story_id}/chapters/${params.id}/pages`, {
             method: "POST",

@@ -1,6 +1,17 @@
 class PagesController < ApplicationController
     before_action :authorize
     
+
+    def other_pages_index
+        pages= other_user_pages
+        render json: pages
+    end
+    
+    def other_pages_show
+        page= other_user_pages.find_by(id: params[:id])
+        render json: page
+    end
+
     def index
         pages= user_pages
         render json: pages
@@ -39,10 +50,12 @@ class PagesController < ApplicationController
       render json: { errors: "Not authorized"}, status: :unauthorized unless session.include? :user_id
     end
 
+
     def other_user_pages
-        user= User.find_by(username: params[:username])
-        story= user.authored_stories.find_by(id: params[:id])
-        story.pages
+        user= User.find_by(id: params[:user_id])
+        story= user.authored_stories.find_by(id: params[:story_id])
+        chapter= story.chapters.find_by(id: params[:chapter_id])
+        chapter.pages
     end
 
     def user_pages
