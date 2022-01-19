@@ -38,7 +38,7 @@ const EditChapter = () => {
             }),
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.story_id}/chapters/${params.id}/`)
+                history.push(`/stories/${params.story_id}/chapters/${params.id}`)
                 console.log(r)
             }
             else {

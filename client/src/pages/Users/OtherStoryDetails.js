@@ -64,7 +64,6 @@ function OtherStoryDetails() {
         )
     }
 
-
     function chapterForm(chapter){
         return(
             <div key={chapter.id}>

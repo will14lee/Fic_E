@@ -22,6 +22,8 @@ const StoryForm = () => {
                 title,
                 premise,
                 genre,
+                status: "Ongoing",
+                page_length: 0,
             }),
         }).then((r)=> {
             if (r.ok){

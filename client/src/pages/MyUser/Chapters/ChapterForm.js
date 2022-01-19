@@ -36,6 +36,7 @@ const ChapterForm = () => {
                 title,
                 summary,
                 characters,
+                author_id: users.id,
             }),
         }).then((r)=> {
             if (r.ok){

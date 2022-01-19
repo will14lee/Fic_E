@@ -7,6 +7,7 @@ const Home = () => {
     const [about, setAbout]= useState(false)
     const [user, setUser]= useState(false)
     const [otherStories, setOtherStories]= useState("")
+    const [longerPremise, setLongerPremise]= useState("")
     useEffect(() => {
         fetch("/me").then((r)=> {
             if (r.ok) {
@@ -25,15 +26,33 @@ const Home = () => {
         .then(setOtherStories)
         })}, [])
 
+    function storyPremise(story){
+        return(
+            <div key={"premise" + story.id}>
+            {story.premise ? (
+                <>
+                {longerPremise==story.id ? (<p>{story.premise}<br/><a onClick={()=>setLongerPremise("")}>Less...</a></p>):(
+                    <>
+                    {story.premise.length > 25 ? (
+                        <p>{story.premise.slice(0,25) + "..."} <br/><a onClick={()=>setLongerPremise(story.id)}>More...</a></p>
+                        ):(<p>{story.premise}</p>)} 
+                    </>
+                )}
+                </>
+            ):(<br/>)}
+            </div>
+        )
+    }
+
     function storyForm(story){
         return(
-                <h3 key={story.id}>
+                <h3 key={"story" + story.id}>
                     <label style={{color:"#2196f3"}}>Title: </label>{story.title}<br/>
                     <label style={{color:"#1e88e5"}}>Genre: </label>{story.genre}<br/>
                     <label style={{color:"#1976d2"}}>Page Length: </label>{story.page_length}<br/>
                     <label style={{color:"#1565c0"}}>Status: </label>{story.status}<br/>
-                    <label style={{color:"#0d47a1"}}>Premise: </label><br/>
-                    {story.premise}<br/>
+                    <label style={{color:"#0d47a1"}}>Premise: </label>
+                    {storyPremise(story)}
                     <button onClick={()=>{history.push(`/stories/${story.id}`)}}>Details</button>
                     <hr/>
                 </h3>
@@ -41,44 +60,25 @@ const Home = () => {
     };
     function otherStoryForm(story){
         return(
-                <h3 key={story.id}>
+                <h3 key={"other story" + story.id}>
                     <label style={{color:"#008200"}}>Title: </label>{story.title}<br/>
                     <label style={{color:"#00fa9a"}}>Author: </label>{story.author.username}<br/>
                     <label style={{color:"#7cfc00"}}>Genre: </label>{story.genre}<br/>
                     <label style={{color:"#3cb371"}}>Page Length: </label>{story.page_length}<br/>
                     <label style={{color:"#2e8b57"}}>Status: </label>{story.status}<br/>
-                    <label style={{color:"#03C03C"}}>Premise: </label><br/>
-                    {story.premise}<br/>
+                    <label style={{color:"#03C03C"}}>Premise: </label>
+                    {storyPremise(story)}
                     <button onClick={()=>{history.push(`/other_stories/${story.id}/users/${story.author.id}`)}}>Details</button>
                     <hr/>
                 </h3>
         );
     };
 
-    function chapterForm(){
-        return(
-            <h3>
-                Title:
-                <br/>
-                Origin: 
-                <br/>
-                <Link to= "/original_chapters/:id/details">
-                    <button>Details</button>​
-                </Link>
-                <br/>
-                <Link to= "/original_chapters/:id/edit">
-                    <button>Edit</button>​
-                </Link>                    
-                <br/>
-                <button>Delete</button>​
-            </h3>
-        )
-    };
     return (
-        <div className="App">
+        <div className="App" key={"App"}>
             <h2>Welcome to Fic. E {user.username}!</h2> ​
                 {about ? (
-                <div>
+                <div key={"Welcome"}>
                     Struggling with writer's block? Join the club, literally!<br/>
                     This website is all about getting past that pesky writers block you are constantly struggling with!​<br/><br/>
                     Create a story, any story your heart desires! Create the title, and genre of your story and get started with some writing! <br/><br/>
@@ -89,14 +89,15 @@ const Home = () => {
                 </div>
                 ):(<button onClick={()=>setAbout(true)}>About Fic E</button>)}
             <br/>
-            <h2 style={{color:"#32cd32"}}>
-                {user.username}'s Reading List
-            </h2>
+            <h2 style={{color:"#32cd32"}}>{user.username}'s Reading List</h2>
             {otherStories.length > 0 ? 
             (otherStories.map((story)=>
-             otherStoryForm(story)
+            <>
+            <Link to= "/other_stories">View More Stories</Link>
+             {otherStoryForm(story)}
+            </>
             )):
-            (<div>
+            (<div key={"Add to Reading List"}>
                 <h3>It appears you don't have any stories added to your reading list! 
                     <br/>
                     You can fix that by clicking <Link to="/other_stories">here</Link> to browse through our collection 
@@ -106,12 +107,13 @@ const Home = () => {
                 </h3>
                 </div>
             )}
-            <h2 style={{color:"#002D62"}}>
-                {user.username}'s Stories​
-            </h2>
+            <h2 style={{color:"#002D62"}}>{user.username}'s Stories​</h2>
             {stories.length > 0 ? 
             (stories.map((story)=>
-            storyForm(story)
+            <>
+            <Link to= "/stories/new">Write More Stories</Link>
+            {storyForm(story)}
+            </>
             )):(
                 <h3>
                     It appears you didn't create any stories. You can change that by clicking <Link to ="/stories/new">here</Link> 
@@ -119,13 +121,8 @@ const Home = () => {
                     to start writing your own amazing adventure!
                 </h3>
             )}
-                
-                <h2>
-                    My Chapters​
-                </h2>
-                {chapterForm()}
         </div>
     )
 }
 
-export default Home
+export default Home;

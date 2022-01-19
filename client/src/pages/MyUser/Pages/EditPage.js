@@ -36,7 +36,7 @@ const EditPage = () => {
             }),
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.story_id}/chapters/${params.chapter_id}/pages/${params.id}/`)
+                history.push(`/stories/${params.story_id}/chapters/${params.chapter_id}/pages/${params.id}`)
                 console.log(r)
             }
             else {
@@ -44,6 +44,9 @@ const EditPage = () => {
             }
         })
     }
+
+     
+
     return (
         <div>
             <h3>Edit Page</h3>

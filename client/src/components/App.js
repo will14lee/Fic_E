@@ -30,7 +30,6 @@ function App() {
     <div className="App">
     <BrowserRouter>
         <h1>Fic. E!</h1>
-        <Navbar/>
         <Switch>
           <Route exact path="/login">  <LoginForm/>  </Route>
           <Route exact path= "/signup">  <SignUpForm/>  </Route>
@@ -61,6 +60,7 @@ function App() {
           <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/pages/:id/edit"> <EditOriginalPage/> </Route>
           <Route exact path="/">  <Home/>  </Route>
         </Switch>
+        <Navbar/>
     </BrowserRouter>
       </div>
   );

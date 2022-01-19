@@ -1,12 +1,5 @@
 class PagesController < ApplicationController
     before_action :authorize
-    # skip_before_action :authorize, only: [:other_pages_show]
-
-    
-    # def other_pages_index
-    #     pages= other_user_pages
-    #     render json: pages
-    # end
     
     def index
         pages= user_pages
@@ -33,6 +26,9 @@ class PagesController < ApplicationController
     end
     
     def destroy
+        user= User.find_by(id: session[:user_id])
+        story= user.authored_stories.find_by(id: params[:story_id])
+        story.decrement(:page_length).save
         page= this_page
         page.destroy
         head :no_content

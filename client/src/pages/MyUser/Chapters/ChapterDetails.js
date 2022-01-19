@@ -8,6 +8,8 @@ const ChapterDetails = () => {
     const [pages, setPages]=useState("")
     const [chapters, setChapters]=useState("")
     const [users, setUsers]= useState("")
+    const [longerText, setLongerText]=useState("")
+    const [longerNotes, setLongerNotes]=useState("")
 
     useEffect(()=>{
         fetch(`/stories/${params.story_id}/chapters/${params.id}/pages`)
@@ -61,11 +63,23 @@ const ChapterDetails = () => {
     function pageForm(page){
         return(
             <div key={page.id}>
-                <p>Page Number: {pages.length}</p>
-                <h3>Text:</h3> 
-                <p>{page.text}</p>
+                {/* <p>Page Number: {pages.length}</p> */}
+                <h3>Text:</h3>
+                {longerText==page.id ? (<>{page.text}<br/><a onClick={()=>setLongerText("")}>Less...</a></>):(
+                    <>
+                    {page.text.length > 25 ? (
+                        <p>{page.text.slice(0,25) + "..."} <br/><a onClick={()=>setLongerText(page.id)}>More...</a></p>
+                    ):(<p>{page.text}</p>)} 
+                    </>
+                )}
                 <h3>Notes:</h3> 
-                <p>{page.notes}</p>
+                {longerNotes==page.id ? (<p>{page.notes}<br/><a onClick={()=>setLongerNotes("")}>Less...</a></p>):(
+                    <>
+                    {page.notes.length > 25 ? (
+                        <p>{page.notes.slice(0,25) + "..."} <br/><a onClick={()=>setLongerNotes(page.id)}>More...</a></p>
+                    ):(<p>{page.notes}</p>)} 
+                    </>
+                )}
                 <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${params.id}/pages/${page.id}`)}>Page Details</button>
                 <hr/>
             </div>

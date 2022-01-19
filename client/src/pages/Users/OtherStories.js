@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom'
 const OtherStories = () => {
     const [stories, setStories]= useState("")
     const [user, setUser]= useState(false)
+    const [longerPremise, setLongerPremise]= useState("")
     const history=useHistory()
 
     function handleSubmit(story){
@@ -44,10 +45,7 @@ const OtherStories = () => {
 
 
     function addToReadingList(story){
-        console.log(story.id)
         handleSubmit(story)
-        // return(
-        // )
     }
 
     function storyForm(story){
@@ -59,22 +57,38 @@ const OtherStories = () => {
             <label style={{color:"#1976d2"}}>Page Length:</label> {story.page_length}<br/>
             <label style={{color:"#1565c0"}}>Status:</label> {story.status}<br/>
             <label style={{color:"#0d47a1"}}>Premise:</label><br/>
-            {story.premise}<br/>
+            {story.premise ? (
+                <>
+                {longerPremise==story.id ? (<p>{story.premise}<br/><a onClick={()=>setLongerPremise("")}>Less...</a></p>):(
+                    <>
+                    {story.premise.length > 25 ? (
+                        <p>{story.premise.slice(0,25) + "..."} <br/><a onClick={()=>setLongerPremise(story.id)}>More...</a></p>
+                        ):(<p>{story.premise}</p>)} 
+                    </>
+                )}
+                </>
+            ):(<br/>)}
             <button onClick={(e)=>addToReadingList(story)}>Add to Reading List</button>
-
+            <hr/>
       </h3>
         )
     }
+
+    // console.log(stories.filter(story=>story.author.username=== "Craig"))
+    // console.log(stories.filter(story=> story))
     return (
         <div>
-            <h3>User Stories</h3>
-            <p>
+            <h2>User Stories</h2>
+            <button onClick={()=>history.push("/")}>Return</button>
+            {/* <p>
                 <label>Author Name</label><input/><button>Search</button>
                 <br/>
                 <label>Story Name</label><input/><button>Search</button>
-            </p>
+            </p> */}
             {stories.length > 0 ? 
-            (stories.map((story)=>
+            (stories
+                .filter(story=>story.author.id!== user.id)
+                .map((story)=>
              storyForm(story)
             )):
             (<div>
