@@ -18,7 +18,7 @@ const PageForm = () => {
             }),
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.story_id}/chapters/${params.id}/`)
+                history.push(`/stories/${params.story_id}/chapters/${params.id}`)
                 console.log(r)
             }
             else {
@@ -35,7 +35,7 @@ const PageForm = () => {
             <textarea value={notes}rows="20" cols="100" onChange={(e)=>setNotes(e.target.value)}></textarea><br/>
             <button onClick={()=>handleSubmit()}>Submit</button>
             <button>Write Next Page</button><br/>
-            <button>Return</button>
+            <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${params.id}`)}>Return</button>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 class ChaptersController < ApplicationController
     before_action :authorize
-    skip_before_action :authorize, only: [:other_story_show]
+    skip_before_action :authorize, only: [:other_chapters_index]
 
     
     def other_chapters_index
@@ -41,8 +41,8 @@ class ChaptersController < ApplicationController
     end
 
     def other_user_chapters
-        user= User.find_by(username: params[:username])
-        story= user.authored_stories.find_by(id: params[:id])
+        user= User.find_by(id: params[:user_id])
+        story= user.authored_stories.find_by(id: params[:story_id])
         story.chapters
     end
 
@@ -56,6 +56,6 @@ class ChaptersController < ApplicationController
         user_chapters.find_by(id: params[:id])
     end
     def chapter_params
-        params.permit(:id, :title, :summary, :characters, :story_id)
+        params.permit(:id, :title, :summary, :characters, :story_id, :author_id)
     end
 end

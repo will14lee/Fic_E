@@ -1,34 +1,39 @@
 class StoriesController < ApplicationController
     before_action :authorize
-  
+    # , :this_story
+    # before action :this_story
+    # , only: [:show]
+    # , :update, :destroy
+
     def stories_index
         stories= Story.all.order(:title)
         render json: stories
     end
 
     def index
-        stories= users_stories
+        stories= user_stories
         render json: stories
     end
     
     def show
-        story= this_story
-        render json: story
+        this_story
+        # story= user_stories.find_by(id: params[:id])
+        render json: @story
     end
     
     def update
-        story= this_story
+        story= user_stories.find_by(id: params[:id])
         story.update(story_params)
         render json: story
     end
     
     def create
-        story= users_stories.create(story_params)
+        story= user_stories.create(story_params)
         render json: story, status: :created
     end
     
     def destroy
-        story= this_story
+        story= user_stories.find_by(id: params[:id])
         story.destroy
         head :no_content
     end
@@ -38,13 +43,13 @@ class StoriesController < ApplicationController
       render json: { errors: "Not authorized"}, status: :unauthorized unless session.include? :user_id
     end
 
-    def users_stories
+    def user_stories
         user= User.find_by(id: session[:user_id])
         user.authored_stories
     end
     
     def this_story
-        users_stories.find_by(id: params[:id])
+        @story= user_stories.find_by(id: params[:id])
     end
     def story_params
         params.permit(:title, :premise, :genre, :status, :page_length)

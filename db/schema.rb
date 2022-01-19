@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2022_01_14_082843) do
     t.text "summary"
     t.string "characters"
     t.string "story_id"
+    t.string "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

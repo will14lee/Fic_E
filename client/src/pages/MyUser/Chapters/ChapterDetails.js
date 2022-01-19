@@ -37,7 +37,7 @@ const ChapterDetails = () => {
             },
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.story_id}/`)
+                history.push(`/stories/${params.story_id}`)
             }else {
                 r.json().then((err)=>console.log(err.errors))
             }
@@ -50,10 +50,10 @@ const ChapterDetails = () => {
                 <p>Title: {chapter.title}</p>
                 <p>Summary: {chapter.summary}</p>
                 <p>Characters: {chapter.characters}</p>
-                <button onClick={()=>history.push(`edit/`)}>Edit Chapter</button><br/>
+                <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${chapter.id}/edit`)}>Edit Chapter</button><br/>
                 <button onClick={()=>handleDelete()}>Delete Chapter</button><br/>
-                <button onClick={()=>history.push(`pages/new`)}>Write a Page</button><br/>
-                <button onClick={()=>history.push(`/${params.story_id}/`)}>Return  </button>
+                <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${chapter.id}/pages/new`)}>Write a Page</button><br/>
+                <button onClick={()=>history.push(`/stories/${params.story_id}`)}>Return  </button>
                 <hr/>
             </div>
         )
@@ -66,7 +66,7 @@ const ChapterDetails = () => {
                 <p>{page.text}</p>
                 <h3>Notes:</h3> 
                 <p>{page.notes}</p>
-                <button onClick={()=>history.push(`pages/${page.id}/`)}>Page Details</button>
+                <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${params.id}/pages/${page.id}`)}>Page Details</button>
                 <hr/>
             </div>
         )
@@ -82,7 +82,7 @@ const ChapterDetails = () => {
             pageForm(page)
             )):(
                 <h3>
-                    It appears you didn't write any pages yet. Write some <Link to ="pages/new/">here.</Link> 
+                    It appears you didn't write any pages yet. Write some <Link to ={`/stories/${params.story_id}/chapters/${params.chapter_id}/pages/${pages.id}`}>here.</Link> 
                 </h3>
             )}
         </div>

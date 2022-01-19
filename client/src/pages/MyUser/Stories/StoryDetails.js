@@ -10,11 +10,11 @@ function StoryDetails() {
     const params= useParams()
 
     useEffect(()=>{
-        fetch(`/stories/${params.id}`)
+        fetch(`/stories/${params.story_id}`)
         .then(resp=> resp.json())
         .then(setStories)
         
-        fetch(`/stories/${params.id}/chapters`)
+        fetch(`/stories/${params.story_id}/chapters`)
         .then(resp=> resp.json())
         .then(setChapters)
 
@@ -31,7 +31,7 @@ function StoryDetails() {
 
     
     function handleDelete(){
-        fetch(`/stories/${params.id}`, {
+        fetch(`/stories/${params.story_id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -55,8 +55,8 @@ function StoryDetails() {
             <h4>Premise:</h4>
             <p>{story.premise}</p>
             <p>
-                <button onClick={()=>history.push(`/${params.id}/edit/`)}>Edit  </button>
-                <button onClick={()=>history.push(`chapters/new/`)}>Write a Chapter</button>
+                <button onClick={()=>history.push(`/stories/${params.story_id}/edit`)}>Edit  </button>
+                <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/new`)}>Write a Chapter</button>
                 <button onClick={()=>handleDelete()}>Delete</button><br/>
                 <button onClick={()=>history.push(`/`)}>Return  </button>
             </p>
@@ -71,7 +71,7 @@ function StoryDetails() {
                 <p>Title: {chapter.title}</p>
                 <p>Summary: {chapter.summary}</p>
                 <p>Characters: {chapter.characters}</p>
-                <button onClick={()=>history.push(`chapters/${chapter.id}/`)}>Chapter Details</button>
+                <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${chapter.id}`)}>Chapter Details</button>
                 <hr/>
             </div>
         )

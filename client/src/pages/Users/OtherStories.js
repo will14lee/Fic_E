@@ -33,7 +33,7 @@ const OtherStories = () => {
                 r.json().then((user)=> setUser(user))
             }
             else{
-                history.push('/login/')
+                history.push('/login')
             }
 
         fetch("/all_stories")
@@ -56,7 +56,7 @@ const OtherStories = () => {
             <label style={{color:"#2196f3"}}>Title:</label> {story.title}<br/>
             <label style={{color:"#2196f3"}}>Author: </label>{story.author.username}<br/>
             <label style={{color:"#1e88e5"}}>Genre:</label> {story.genre}<br/>
-            <label style={{color:"#1976d2"}}>Page Length:</label> {story.pageLength}<br/>
+            <label style={{color:"#1976d2"}}>Page Length:</label> {story.page_length}<br/>
             <label style={{color:"#1565c0"}}>Status:</label> {story.status}<br/>
             <label style={{color:"#0d47a1"}}>Premise:</label><br/>
             {story.premise}<br/>
@@ -80,7 +80,7 @@ const OtherStories = () => {
             (<div>
                 <h3>Wow! Would you look at that! It's completely empty! 
                     <br/>
-                    You can fix this by clicking <Link to="/new/">here</Link> to be number #1 and create a story! 
+                    You can fix this by clicking <Link to="/new">here</Link> to be number #1 and create a story! 
                     <br/>
                 </h3>
                 </div>

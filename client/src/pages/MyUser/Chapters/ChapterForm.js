@@ -11,7 +11,7 @@ const ChapterForm = () => {
     const params=useParams("")
 
     useEffect(()=>{
-        fetch(`/stories/${params.id}`)
+        fetch(`/stories/${params.story_id}`)
         .then(resp=> resp.json())
         .then(setStories)
         
@@ -27,7 +27,7 @@ const ChapterForm = () => {
     }, [])
 
     function handleSubmit(){
-        fetch(`/stories/${params.id}/chapters`, {
+        fetch(`/stories/${params.story_id}/chapters`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -39,7 +39,7 @@ const ChapterForm = () => {
             }),
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.id}/`)
+                history.push(`/stories/${params.story_id}`)
                 console.log(r)
             }
             else {
@@ -55,7 +55,9 @@ const ChapterForm = () => {
             <p><textarea  value={summary} onChange={(e)=>setSummary(e.target.value)} rows="5" cols="40" placeholder='If he really wanted peace he really should not have eaten that Taco Bell..'/></p>
             <p><label>Characters</label></p>
             <p><textarea value={characters} rows="5" cols="40" onChange={(e)=> setCharacters(e.target.value)} placeholder='Romeo, Juliet, San Juan the Goat Slayer'/></p>
-            <p><button type='submit' onClick={()=>handleSubmit()}>Create</button></p>
+            <p><button type='submit' onClick={()=>handleSubmit()}>Create</button><br/>
+            <button onClick={()=>history.push(`/stories/${params.story_id}`)}>Return</button>
+            </p>
         </div>
     )
 }

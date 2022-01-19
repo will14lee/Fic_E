@@ -7,10 +7,10 @@ Rails.application.routes.draw do
     end  
   end
 
-get '/:username/:id/other_chapters', to: 'chapters#other_chapters_index'
-get '/other_story/:id', to: 'story_listings#other_story_show'
+get '/other_stories/:story_id/users/:user_id/other_chapters', to: 'chapters#other_chapters_index'
+get '/other_stories/:id', to: 'story_listings#other_story_show'
 get '/all_stories', to: 'stories#stories_index'
-
+get '/story_listings/:story_id/users/:user_id', to: 'story_listings#show'
 
   # get '/hello', to: 'application#hello_world'
 post '/signup', to: 'users#create'

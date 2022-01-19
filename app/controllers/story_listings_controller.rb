@@ -3,7 +3,8 @@ class StoryListingsController < ApplicationController
     skip_before_action :authorize, only: [:other_story_show]
     
     def other_story_show
-        story= Story.all.find_by(id: params[:id])
+        story= this_story
+        # story= Story.all.find_by(id: params[:id])
         render json: story
     end
 

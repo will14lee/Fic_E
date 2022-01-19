@@ -19,14 +19,14 @@ const EditStory = () => {
                 history.push('/login')
             }
 
-        fetch(`/stories/${params.id}`)
+        fetch(`/stories/${params.story_id}`)
         .then(resp=> resp.json())
         .then(setStories)
         
         })}, [])
 
     function handleSubmit(){
-        fetch(`/stories/${params.id}`, {
+        fetch(`/stories/${params.story_id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"

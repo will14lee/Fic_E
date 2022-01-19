@@ -13,7 +13,7 @@ const Home = () => {
                 r.json().then((user)=> setUser(user))
             }
             else{
-                history.push('/login/')
+                history.push('/login')
             }
 
         fetch("/stories")
@@ -34,7 +34,7 @@ const Home = () => {
                     <label style={{color:"#1565c0"}}>Status: </label>{story.status}<br/>
                     <label style={{color:"#0d47a1"}}>Premise: </label><br/>
                     {story.premise}<br/>
-                    <button onClick={()=>{history.push(`${story.id}/`)}}>Details</button>
+                    <button onClick={()=>{history.push(`/stories/${story.id}`)}}>Details</button>
                     <hr/>
                 </h3>
         );
@@ -49,7 +49,7 @@ const Home = () => {
                     <label style={{color:"#2e8b57"}}>Status: </label>{story.status}<br/>
                     <label style={{color:"#03C03C"}}>Premise: </label><br/>
                     {story.premise}<br/>
-                    <button onClick={()=>{history.push(`stories/${story.author.username}/${story.id}/`)}}>Details</button>
+                    <button onClick={()=>{history.push(`/other_stories/${story.id}/users/${story.author.id}`)}}>Details</button>
                     <hr/>
                 </h3>
         );
@@ -62,11 +62,11 @@ const Home = () => {
                 <br/>
                 Origin: 
                 <br/>
-                <Link to= "/original_chapters/:id/details/">
+                <Link to= "/original_chapters/:id/details">
                     <button>Details</button>​
                 </Link>
                 <br/>
-                <Link to= "/original_chapters/:id/edit/">
+                <Link to= "/original_chapters/:id/edit">
                     <button>Edit</button>​
                 </Link>                    
                 <br/>
@@ -82,8 +82,8 @@ const Home = () => {
                     Struggling with writer's block? Join the club, literally!<br/>
                     This website is all about getting past that pesky writers block you are constantly struggling with!​<br/><br/>
                     Create a story, any story your heart desires! Create the title, and genre of your story and get started with some writing! <br/><br/>
-                    Go ahead! Click <Link to= "/new/">here</Link> to create your story!<br/>
-                    Do you want to perhaps read the stories of other authors? Click right <Link to= "/stories/">here</Link><br/>
+                    Go ahead! Click <Link to= "/stories/new">here</Link> to create your story!<br/>
+                    Do you want to perhaps read the stories of other authors? Click right <Link to= "/other_stories">here</Link><br/>
                     to search for a genre of stories from other amazing authors just like you!<br/>
                     <p><button onClick={()=> setAbout(false)}>Hide</button></p>
                 </div>
@@ -99,7 +99,7 @@ const Home = () => {
             (<div>
                 <h3>It appears you don't have any stories added to your reading list! 
                     <br/>
-                    You can fix that by clicking <Link to="/stories/">here</Link> to browse through our collection 
+                    You can fix that by clicking <Link to="/other_stories">here</Link> to browse through our collection 
                     <br/>
                     of stories by other authors and adding them to this list!
                     <br/>
@@ -114,7 +114,7 @@ const Home = () => {
             storyForm(story)
             )):(
                 <h3>
-                    It appears you didn't create any stories. You can change that by clicking <Link to ="/new/">here</Link> 
+                    It appears you didn't create any stories. You can change that by clicking <Link to ="/stories/new">here</Link> 
                     <br/>
                     to start writing your own amazing adventure!
                 </h3>

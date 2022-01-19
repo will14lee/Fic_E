@@ -52,7 +52,7 @@ const EditPage = () => {
             <p><label>Notes</label></p>
             <textarea placeholder={pages.notes} value={newNotes}rows="20" cols="100" onChange={(e)=>setNewNotes(e.target.value)}></textarea><br/>
             <p><button type='submit' onClick={()=>handleSubmit()}>Edit</button><br/>
-            <button onClick={()=>history.push(`/${params.story_id}/chapters/${params.chapter_id}/pages/${params.id}/`)}>Return</button></p>
+            <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${params.chapter_id}/pages/${params.id}`)}>Return</button></p>
         </div>
     )
 }

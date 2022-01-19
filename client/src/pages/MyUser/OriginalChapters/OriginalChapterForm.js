@@ -11,7 +11,7 @@ const OriginalChapterForm = () => {
     const params=useParams("")
 
     useEffect(()=>{
-        fetch(`/story_listings/${params.id}`)
+        fetch(`/other_stories/${params.story_id}`)
         .then(resp=> resp.json())
         .then(setOtherStories)
         
@@ -27,7 +27,7 @@ const OriginalChapterForm = () => {
     }, [])
 
     function handleSubmit(){
-        fetch(`/stories/${params.id}/chapters`, {
+        fetch(`/stories/${params.story_id}/chapters`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -36,6 +36,7 @@ const OriginalChapterForm = () => {
                 title,
                 summary,
                 characters,
+                author_id: users.id
             }),
         }).then((r)=> {
             if (r.ok){

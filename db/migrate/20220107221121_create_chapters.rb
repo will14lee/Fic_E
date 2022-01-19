@@ -5,7 +5,8 @@ class CreateChapters < ActiveRecord::Migration[7.0]
       t.text :summary
       t.string :characters
       t.string :story_id
-
+      t.string :author_id
+      
       t.timestamps
     end
   end

@@ -36,7 +36,7 @@ const PageDetails = () => {
             },
         }).then((r)=> {
             if (r.ok){
-                history.push(`/${params.story_id}/chapters/${params.chapter_id}/`)
+                history.push(`/stories/${params.story_id}/chapters/${params.chapter_id}`)
             }else {
                 r.json().then((err)=>console.log(err.errors))
             }
@@ -48,9 +48,9 @@ const PageDetails = () => {
         <p>{pages.text}</p><hr/>
         <h4>Notes:</h4> 
         <p>{pages.notes}</p>
-        <button onClick={()=>history.push("edit")}>Edit Page</button><br/>
+        <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${params.chapter_id}/pages/${params.id}/edit`)}>Edit Page</button><br/>
         <button onClick={()=>{handleDelete()}}>Delete Page</button><br/>
-        <button onClick={()=>history.push(`/${params.story_id}/chapters/${params.chapter_id}/`)}>Return</button>
+        <button onClick={()=>history.push(`/stories/${params.story_id}/chapters/${params.chapter_id}`)}>Return</button>
         <hr/>
     </div>
     )

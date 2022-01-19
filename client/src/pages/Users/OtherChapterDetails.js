@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OtherPageDetails = () => {
+const OtherChapterDetails = () => {
     return (
         <div>
             <h3>Other Chapter Details</h3>
@@ -8,4 +8,4 @@ const OtherPageDetails = () => {
     )
 }
 
-export default OtherPageDetails
+export default OtherChapterDetails

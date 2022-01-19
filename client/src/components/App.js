@@ -1,7 +1,6 @@
 // client/src/components/App.js
 import '../App.css';
 import Navbar from './Navbar'
-import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import LoginForm from './LoginForm'
@@ -17,8 +16,7 @@ import PageDetails from "../pages/MyUser/Pages/PageDetails";
 import EditPage from "../pages/MyUser/Pages/EditPage";
 import OtherStories from "../pages/Users/OtherStories";
 import OtherStoryDetails from "../pages/Users/OtherStoryDetails";
-import OtherChapters from "../pages/Users/OtherChapters";
-import OtherPages from "../pages/Users/OtherPages";
+import OtherChapterDetails from '../pages/Users/OtherChapterDetails';
 import OtherPageDetails from "../pages/Users/OtherPageDetails";
 import OriginalChapterForm from "../pages/MyUser/OriginalChapters/OriginalChapterForm";
 import OriginalChapterDetails from "../pages/MyUser/OriginalChapters/OriginalChapterDetails";
@@ -26,7 +24,6 @@ import EditOriginalChapter from "../pages/MyUser/OriginalChapters/EditOriginalCh
 import OriginalPageForm from "../pages/MyUser/OriginalPages/OriginalPageForm";
 import OriginalPageDetails from "../pages/MyUser/OriginalPages/OriginalPageDetail";
 import EditOriginalPage from "../pages/MyUser/OriginalPages/EditOriginalPage";
-
 
 function App() {
   return (
@@ -37,26 +34,31 @@ function App() {
         <Switch>
           <Route exact path="/login">  <LoginForm/>  </Route>
           <Route exact path= "/signup">  <SignUpForm/>  </Route>
-          <Route exact path="/new"> <StoryForm/> </Route>  
-          <Route exact path= "/:id/chapters/new"> <ChapterForm/> </Route>
-          <Route exact path= "/:id/edit"> <EditStory/> </Route>
-          <Route exact path= "/:story_id/chapters/:id/pages/new"> <PageForm/> </Route>
-          <Route exact path= "/:story_id/chapters/:id/edit"> <EditChapter/> </Route>
-          <Route exact path= "/:story_id/chapters/:id"> <ChapterDetails/> </Route>
-          <Route exact path= "/:story_id/chapters/:chapter_id/pages/:id">  <PageDetails/> </Route>
-          <Route exact path= "/:story_id/chapters/:chapter_id/pages/:id/edit"> <EditPage/> </Route>
-          <Route exact path= "/stories/:username/:id"> <OtherStoryDetails/> </Route>
-          <Route exact path= "/stories"> <OtherStories/> </Route>
-          <Route exact path= "/stories/:id/chapters"> <OtherChapters/> </Route>
-          <Route exact path= "/stories/:story_id/chapters/:id"> <OtherPages/> </Route>
-          <Route exact path= "/stories/:story_id/chapters/:chapter_id/pages/:id"> <OtherPageDetails/> </Route>
-          <Route exact path= "/stories/:username/:id/original_chapter/new"> <OriginalChapterForm/> </Route>
-          <Route exact path= "/original_chapter/:id/details"> <OriginalChapterDetails/> </Route>
-          <Route exact path= "original_chapter/:id/edit"> <EditOriginalChapter/> </Route>
-          <Route exact path= "/original_chapter/:chapter_id/pages/new"> <OriginalPageForm/> </Route>
-          <Route exact path= "/original_chapter/:chapter_id/pages/details"> <OriginalPageDetails/> </Route>
-          <Route exact path= "/original_chapter/:chapter_id/pages/edit"> <EditOriginalPage/> </Route>
-          <Route exact path= "/:id"> <StoryDetails/> </Route>
+
+          <Route exact path= "/stories/new"> <StoryForm/> </Route>  
+          <Route exact path= "/stories/:story_id"> <StoryDetails/> </Route>
+          <Route exact path= "/stories/:story_id/edit"> <EditStory/> </Route>
+
+          <Route exact path= "/stories/:story_id/chapters/new"> <ChapterForm/> </Route>
+          <Route exact path= "/stories/:story_id/chapters/:id"> <ChapterDetails/> </Route>
+          <Route exact path= "/stories/:story_id/chapters/:id/edit"> <EditChapter/> </Route>
+
+          <Route exact path= "/stories/:story_id/chapters/:id/pages/new"> <PageForm/> </Route>
+          <Route exact path= "/stories/:story_id/chapters/:chapter_id/pages/:id">  <PageDetails/> </Route>
+          <Route exact path= "/stories/:story_id/chapters/:chapter_id/pages/:id/edit"> <EditPage/> </Route>
+
+          <Route exact path= "/other_stories"> <OtherStories/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id"> <OtherStoryDetails/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/chapters/:id"> <OtherChapterDetails/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/chapters/:chapter_id/pages/:id"> <OtherPageDetails/> </Route>
+
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/new"> <OriginalChapterForm/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:id"> <OriginalChapterDetails/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:id/edit"> <EditOriginalChapter/> </Route>
+
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/pages/new"> <OriginalPageForm/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/pages/:id"> <OriginalPageDetails/> </Route>
+          <Route exact path= "/other_stories/:story_id/users/:user_id/original_chapters/:chapter_id/pages/:id/edit"> <EditOriginalPage/> </Route>
           <Route exact path="/">  <Home/>  </Route>
         </Switch>
     </BrowserRouter>
