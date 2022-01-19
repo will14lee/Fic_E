@@ -5,6 +5,9 @@ const OtherStories = () => {
     const [stories, setStories]= useState("")
     const [user, setUser]= useState(false)
     const [longerPremise, setLongerPremise]= useState("")
+    const [authorFilter, setAuthorFilter]=useState("")
+    const [titleFilter, setTitleFilter]=useState("")
+
     const history=useHistory()
 
     function handleSubmit(story){
@@ -73,24 +76,24 @@ const OtherStories = () => {
       </h3>
         )
     }
-
-    // console.log(stories.filter(story=>story.author.username=== "Craig"))
-    // console.log(stories.filter(story=> story))
     return (
         <div>
             <h2>User Stories</h2>
             <button onClick={()=>history.push("/")}>Return</button>
-            {/* <p>
-                <label>Author Name</label><input/><button>Search</button>
-                <br/>
-                <label>Story Name</label><input/><button>Search</button>
-            </p> */}
+            <p>
+                <label>Story Name</label><input onChange={(e)=>setTitleFilter(e.target.value)}/><br/>
+                <label>Author Name</label><input onChange={(e)=>setAuthorFilter(e.target.value)}/>
+            </p>
             {stories.length > 0 ? 
-            (stories
-                .filter(story=>story.author.id!== user.id)
+            (<>
+            {stories
+                .filter(story=>story.author.id!== user.id 
+                    && story.author.username.toLowerCase().includes(authorFilter.toLocaleLowerCase()) 
+                    && story.title.toLowerCase().includes(titleFilter.toLowerCase()))
                 .map((story)=>
              storyForm(story)
-            )):
+            )}
+            </>):
             (<div>
                 <h3>Wow! Would you look at that! It's completely empty! 
                     <br/>
