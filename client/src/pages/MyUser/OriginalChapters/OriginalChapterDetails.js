@@ -4,8 +4,8 @@ import { useHistory, useParams } from 'react-router-dom'
 
 function OriginalChapterDetails() {
     const [users, setUsers]= useState("")
-    const [otherPages, setOtherPages]= useState("")
-    const [otherChapters, setOtherChapters]= useState("")
+    const [originalPages, setOriginalPages]= useState("")
+    const [originalChapters, setOriginalChapters]= useState("")
     const [longerText, setLongerText]=useState("")
     const [longerNotes, setLongerNotes]=useState("")
     const [longerSummary, setLongerSummary]=useState("")
@@ -21,17 +21,15 @@ function OriginalChapterDetails() {
           history.push('/login')
         }
       })
-      fetch(`/other_stories/${params.story_id}/users/${params.user_id}/other_chapters/${params.chapter_id}/my_users/${params.my_user_id}`)
+      fetch(`/other_stories/${params.story_id}/users/${params.user_id}/original_chapters/${params.chapter_id}/my_users/${params.my_user_id}`)
       .then(resp=> resp.json())
-      .then(setOtherChapters)
+      .then(setOriginalChapters)
       
-      fetch(`/other_stories/${params.story_id}/users/${params.user_id}/other_chapters/${params.chapter_id}/my_users/${params.my_user_id}/pages`)
+      fetch(`/other_stories/${params.story_id}/users/${params.user_id}/original_chapters/${params.chapter_id}/my_users/${params.my_user_id}/pages`)
       .then(resp=> resp.json())
-      .then(setOtherPages)
+      .then(setOriginalPages)
     }, [])
-    
-    console.log(users)
-    
+        
     function handleDelete(){
         fetch(`/story_listings/${params.story_id}`, {
             method: "DELETE",
@@ -47,23 +45,24 @@ function OriginalChapterDetails() {
         })
     }
 
-
+console.log(params)
     function chapterForm(chapter){
         return(
             <div key={chapter.id}>
                 <h2>{chapter.title}</h2>
-                {otherChapters ? (
-                    <>{params.user_id==otherChapters.author.user_id ? (<></>):(<>
+                <button onClick={()=>history.push(`${params.my_user_id}/pages/new`)}>Write a Page</button><br/>
+                <button onClick={()=>history.push(`/other_stories/${params.story_id}/users/${params.user_id}`)}>Return</button>
+                {originalChapters ? (
+                    <>{params.user_id==originalChapters.author.user_id ? (<></>):(<>
                     <p>
-                        {otherChapters.author.username==users.username ? (<>Chapter Author: Me!</>) : 
-                        (<>Chapter Author: {otherChapters.author.username}</>)}
+                        {originalChapters.author.username==users.username ? (<>Chapter Author: Me!</>) : 
+                        (<>Chapter Author: {originalChapters.author.username}</>)}
                     </p>
                     </>)}
                     </>
                 ):(<></>)}
                 
-                <p>Summary: 
-                {chapter.summary ? (
+                <p>Summary: {chapter.summary ? (
                     <>{longerSummary==chapter.id ? (<>{chapter.summary}<br/><a onClick={()=>setLongerSummary("")}>Less...</a></>):(
                         <>
                         {chapter.summary.length > 25 ? (
@@ -115,21 +114,24 @@ function OriginalChapterDetails() {
             </>
         )
     }
+    console.log(originalChapters)
+    console.log(originalPages)
+
     return (
         <div>
-            {/* {chapterForm(otherChapters)}
+            {chapterForm(originalChapters)}
             <h2>Pages</h2>
             <hr/>
-            {otherPages ? (<>
-            {otherPages.length > 0 ? 
-            (otherPages.map((otherPage)=>
-            pageForm(otherPage)
+            {originalPages ? (<>
+            {originalPages.length > 0 ? 
+            (originalPages.map((originalPage)=>
+            pageForm(originalPage)
             )):(
                 <>
                 It appears there isn't any pages!
                 </>
                 )}
-            </>):(<>It appears there isn't any pages!</>)} */}
+            </>):(<>It appears there isn't any pages!</>)}
 
         </div>
         )

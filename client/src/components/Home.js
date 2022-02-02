@@ -76,7 +76,7 @@ const Home = () => {
 
     return (
         <div className="App" key={"App"}>
-            <h2>Welcome to Fic. E {user.username}!</h2> ​
+            <h2 style={{color:"#8645a0"}}>Welcome to Fic. E {user.username}!</h2> ​
                 {about ? (
                 <div key={"Welcome"}>
                     Struggling with writer's block? Join the club, literally!<br/>

@@ -1,5 +1,5 @@
 class Chapter < ApplicationRecord
     belongs_to :author, class_name: "User"
-    has_many :story
+    belongs_to :story
     has_many :pages, dependent: :destroy
 end

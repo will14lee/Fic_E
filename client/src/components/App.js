@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
     <BrowserRouter>
-        <h1>Fic. E!</h1>
+        <h1>Fic. E</h1>
         <Switch>
           <Route exact path="/login">  <LoginForm/>  </Route>
           <Route exact path= "/signup">  <SignUpForm/>  </Route>
